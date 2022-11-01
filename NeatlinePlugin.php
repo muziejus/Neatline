@@ -31,7 +31,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         'neatline_globals',
         'neatline_presenters',
         'exhibit_layouts',
-        'search_record_types'
+        'search_record_types',
+        'api_resources'
     );
 
 
@@ -261,5 +262,26 @@ SQL
       $recordTypes['NeatlineExhibit'] = __('Neatline Exhibit');
       $recordTypes['NeatlineRecord'] = __('Neatline Record');
       return $recordTypes;
+    }
+
+    public function filterApiResources($apiResources)
+    {
+        $apiResources['neatline_exhibits'] = array(
+            'record_type' => 'NeatlineExhibit',
+            'actions' => array(
+                'index',
+                'get', 
+            ),
+        );
+
+        $apiResources['neatline_records'] = array(
+            'record_type' => 'NeatlineRecord',
+            'actions' => array(
+                'index',
+                'get', 
+            ),
+        );
+
+        return $apiResources;
     }
 }
